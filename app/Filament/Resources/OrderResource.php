@@ -23,10 +23,6 @@ class OrderResource extends Resource
         return false; // Order creation is handled by the frontend app
     }
 
-    // "Read Only" usually means we can view but not just edit fields willy-nilly. 
-    // However, status updates might be needed? User said "Read-only for the staff" regarding items.
-    // I will allow Edit but make the form ReadDisabled or use Infolist for the view.
-
     public static function form(Form $form): Form
     {
         return $form
@@ -57,8 +53,7 @@ class OrderResource extends Resource
                             ->disabled(),
                     ])->columns(2),
 
-                // We display items using a Repeater, but disabled
-                Forms\Components\Repeater::make('items') // Uses the 'items' relationship
+                Forms\Components\Repeater::make('items')
                     ->relationship()
                     ->schema([
                         Forms\Components\TextInput::make('product_name')
@@ -67,7 +62,6 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('total_price')
                             ->label('Total'),
 
-                        // Custom Placeholder to show the specific flavors (JSON) nicely
                         Forms\Components\Placeholder::make('selected_variants')
                             ->label('Selected Flavors')
                             ->content(function ($record) {
@@ -78,7 +72,7 @@ class OrderResource extends Resource
                             ->columnSpanFull(),
                     ])
                     ->columnSpanFull()
-                    ->disabled() // Makes the repeater read-only
+                    ->disabled()
                     ->deletable(false)
                     ->addable(false)
             ]);
@@ -87,6 +81,8 @@ class OrderResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn($query) => $query->with(['items']))
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
                 Tables\Columns\TextColumn::make('customer_name')
@@ -118,34 +114,40 @@ class OrderResource extends Resource
                     ->url(fn(Order $record) => $record->getWhatsAppUrl())
                     ->openUrlInNewTab(),
                 Tables\Actions\ActionGroup::make([
+                    Tables\Actions\Action::make('pending')
+                        ->label('Kembalikan ke Pending')
+                        ->icon('heroicon-o-clock')
+                        ->color('gray')
+                        ->visible(fn(Order $record) => $record->status !== 'pending')
+                        ->action(function (Order $record) {
+                            $record->update(['status' => 'pending']);
+                        }),
+
                     Tables\Actions\Action::make('process')
                         ->label('Proses')
                         ->icon('heroicon-o-arrow-path')
                         ->color('warning')
-                        ->visible(fn(Order $record) => $record->status === 'pending')
+                        ->visible(fn(Order $record) => $record->status !== 'processing')
                         ->action(function (Order $record) {
                             $record->update(['status' => 'processing']);
-                            return redirect(request()->header('Referer'));
                         }),
 
                     Tables\Actions\Action::make('complete')
                         ->label('Selesai')
                         ->icon('heroicon-o-check')
                         ->color('success')
-                        ->visible(fn(Order $record) => in_array($record->status, ['pending', 'processing']))
+                        ->visible(fn(Order $record) => $record->status !== 'completed')
                         ->action(function (Order $record) {
                             $record->update(['status' => 'completed']);
-                            return redirect(request()->header('Referer'));
                         }),
 
                     Tables\Actions\Action::make('cancel')
                         ->label('Batal')
                         ->icon('heroicon-o-x-mark')
                         ->color('danger')
-                        ->visible(fn(Order $record) => !in_array($record->status, ['completed', 'cancelled']))
+                        ->visible(fn(Order $record) => $record->status !== 'cancelled')
                         ->action(function (Order $record) {
                             $record->update(['status' => 'cancelled']);
-                            return redirect(request()->header('Referer'));
                         }),
                 ])
                     ->label('Ubah Status')
@@ -179,14 +181,10 @@ class OrderResource extends Resource
                         Infolists\Components\TextEntry::make('product_name'),
                         Infolists\Components\TextEntry::make('quantity'),
                         Infolists\Components\TextEntry::make('total_price')->money('idr'),
-
-                        // Custom entry to render the variants list
                         Infolists\Components\TextEntry::make('selected_variants')
                             ->label('Chosen Flavors')
                             ->formatStateUsing(function ($state, $record) {
-                                // $record is the OrderItem model here
                                 if (empty($state)) return '-';
-                                // Assuming we use our helper 'resolved_variants' or just parse the array
                                 $variants = $record->resolved_variants;
                                 return $variants->pluck('name')->join(', ');
                             })
@@ -200,7 +198,6 @@ class OrderResource extends Resource
     {
         return [
             'index' => Pages\ListOrders::route('/'),
-            // 'create' => Pages\CreateOrder::route('/create'), // Disabled
             'view' => Pages\ViewOrder::route('/{record}'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];

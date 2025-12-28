@@ -53,7 +53,7 @@ class Order extends Model
             }
         }
 
-        $message .= "\nTotal: Rp " . number_format($this->total_price, 0, ',', '.') . "\n";
+        $message .= "\nTotal: Rp " . number_format((float) $this->total_price, 0, ',', '.') . "\n";
         $message .= "Status Pembayaran: " . ucfirst($this->payment_status) . "\n";
         $message .= "Status Pesanan: " . ucfirst($this->status) . "\n\n";
         $message .= "Mohon konfirmasinya ya kak. Terima kasih!";
@@ -63,6 +63,10 @@ class Order extends Model
 
     public function getWhatsAppUrl(): string
     {
+        if (empty($this->customer_phone)) {
+            return '#'; // Or a default fallback URL
+        }
+
         $phone = preg_replace('/[^0-9]/', '', $this->customer_phone);
 
         if (str_starts_with($phone, '0')) {

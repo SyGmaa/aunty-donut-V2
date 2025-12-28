@@ -15,7 +15,7 @@ class SalesChart extends ChartWidget
 
     protected function getData(): array
     {
-        $data = Trend::model(Order::class)
+        $data = Trend::query(Order::query()->where('status', '!=', 'cancelled'))
             ->between(
                 start: now()->startOfYear(),
                 end: now()->endOfYear(),

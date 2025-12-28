@@ -2,7 +2,8 @@
 
     <!-- Back Button (Optional context) -->
     <div class="max-w-6xl mx-auto mb-6">
-        <a href="#" class="inline-flex items-center text-gray-400 hover:text-pink-600 transition-colors">
+        <a href="{{ route('home') }}"
+            class="inline-flex items-center text-gray-400 hover:text-pink-600 transition-colors">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
                 </path>
