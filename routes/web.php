@@ -12,3 +12,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', ProductList::class)->name('home');
 Route::get('/product/{product:slug}', ProductDetail::class)->name('product.detail');
+Route::get('/checkout', \App\Livewire\Checkout::class)->name('checkout');

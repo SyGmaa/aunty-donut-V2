@@ -15,6 +15,7 @@ class Product extends Model
         'slug',
         'description',
         'price',
+        'image',
         'is_bundle',
         'bundle_size',
         'is_active',
@@ -23,6 +24,7 @@ class Product extends Model
     protected $casts = [
         'is_bundle' => 'boolean',
         'is_active' => 'boolean',
+        'bundle_size' => 'integer',
         'price' => 'decimal:2',
     ];
 

@@ -33,6 +33,10 @@ class ProductResource extends Resource
                         Forms\Components\TextInput::make('slug')
                             ->required()
                             ->unique(ignoreRecord: true),
+                        Forms\Components\FileUpload::make('image')
+                            ->image()
+                            ->directory('products')
+                            ->columnSpanFull(),
                         Forms\Components\Textarea::make('description')
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make('price')

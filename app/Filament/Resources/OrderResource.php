@@ -36,6 +36,9 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('id')
                             ->label('Order ID')
                             ->disabled(),
+                        Forms\Components\TextInput::make('customer_name')->disabled(),
+                        Forms\Components\TextInput::make('customer_phone')->disabled(),
+                        Forms\Components\Textarea::make('address')->columnSpanFull()->disabled(),
                         Forms\Components\Select::make('status')
                             ->options([
                                 'pending' => 'Pending',
@@ -82,7 +85,10 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('user.name')->label('Customer'),
+                Tables\Columns\TextColumn::make('customer_name')
+                    ->label('Customer')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('customer_phone')->label('Phone'),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
@@ -114,11 +120,14 @@ class OrderResource extends Resource
                 Infolists\Components\Section::make('Order Information')
                     ->schema([
                         Infolists\Components\TextEntry::make('id'),
+                        Infolists\Components\TextEntry::make('customer_name')->label('Name'),
+                        Infolists\Components\TextEntry::make('customer_phone')->label('Phone'),
+                        Infolists\Components\TextEntry::make('address')->columnSpanFull(),
                         Infolists\Components\TextEntry::make('status')
                             ->badge(),
                         Infolists\Components\TextEntry::make('total_price')
                             ->money('idr'),
-                        Infolists\Components\TextEntry::make('notes'),
+                        Infolists\Components\TextEntry::make('notes')->columnSpanFull(),
                     ])->columns(2),
 
                 Infolists\Components\RepeatableEntry::make('items')
