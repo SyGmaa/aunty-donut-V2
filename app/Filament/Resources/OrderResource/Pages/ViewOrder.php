@@ -14,6 +14,12 @@ class ViewOrder extends ViewRecord
     {
         return [
             Actions\EditAction::make(),
+            Actions\Action::make('chat')
+                ->label('WhatsApp')
+                ->icon('heroicon-o-chat-bubble-left-ellipsis')
+                ->color('success')
+                ->url(fn($record) => $record->getWhatsAppUrl())
+                ->openUrlInNewTab(),
         ];
     }
 }

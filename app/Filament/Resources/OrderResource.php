@@ -107,6 +107,12 @@ class OrderResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(), // Prefer View over Edit for read-only feel
                 Tables\Actions\EditAction::make(), // Allow editing status
+                Tables\Actions\Action::make('chat')
+                    ->label('WhatsApp')
+                    ->icon('heroicon-o-chat-bubble-left-ellipsis')
+                    ->color('success')
+                    ->url(fn(Order $record) => $record->getWhatsAppUrl())
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 //
