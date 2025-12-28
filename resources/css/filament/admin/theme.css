@@ -99,3 +99,38 @@
     font-size: 0.75rem;
     letter-spacing: 0.05em;
 }
+
+/* FIX: Ensure Main Content Background is correct to avoid transparency issues in Dark Mode updates */
+.fi-main {
+    background-color: rgb(249 250 251);
+}
+.dark .fi-main {
+    background-color: rgb(9 9 11) !important; /* zinc-950 */
+}
+
+/* FIX: Table Background & Text */
+.fi-ta-content {
+    background-color: white;
+}
+.dark .fi-ta-content {
+    background-color: rgb(24 24 27) !important; /* zinc-900 */
+}
+
+.fi-ta-row {
+    color: rgb(17 24 39);
+}
+.dark .fi-ta-row {
+    color: white !important;
+}
+
+/* FIX: Force remove persistent loading overlay visual */
+.fi-loading, .fi-ta-content.fi-loading, .fi-ta-table.fi-loading {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+/* Hide the overlay backdrop specifically if it exists as a separate element */
+.fi-ta-loading-overlay {
+    display: none !important;
+}
