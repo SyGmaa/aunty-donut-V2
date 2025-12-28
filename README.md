@@ -1,66 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aunty Donut E-Commerce 🍩
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Laravel](https://img.shields.io/badge/Laravel-10-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Filament](https://img.shields.io/badge/Filament-3.2-orange?style=for-the-badge&logo=laravel&logoColor=white)
+![Livewire](https://img.shields.io/badge/Livewire-3-4e56a6?style=for-the-badge&logo=livewire&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-## About Laravel
+**Aunty Donut** adalah platform e-commerce modern yang dirancang khusus untuk penjualan donat, mendukung pembelian satuan maupun paket bundle (seperti Box of 6 atau Box of 12) dengan pilihan varian rasa yang dapat disesuaikan oleh pelanggan.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Aplikasi ini dibangun menggunakan framework **Laravel 10** yang handal, dengan **Filament PHP** sebagai panel admin yang powerful, dan **Livewire** untuk pengalaman frontend yang dinamis tanpa perlu menulis banyak JavaScript kustom.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Fitur Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🛒 Halaman Pengguna (Frontend)
+*   **Katalog Produk:** Menampilkan daftar donat satuan dan paket bundle yang tersedia.
+*   **Detail Produk Interaktif:**
+    *   Informasi detail mengenai produk.
+    *   **Pilih Varian (Rasa):** Fitur khusus untuk produk bundle dimana pelanggan dapat memilih kombinasi rasa sesuai keinginan (misal: 2 Coklat, 3 Matcha, 1 Tiramisu untuk Box of 6).
+    *   Validasi stok varian secara real-time.
+*   **Keranjang Belanja (Cart):** Menyimpan item belanjaan sementara.
+*   **Checkout:** Proses penyelesaian pesanan yang mudah.
 
-## Learning Laravel
+### 🛠 Panel Admin (Backend)
+*   **Dashboard:** Ringkasan performa penjualan dan statistik penting lainnya.
+*   **Manajemen Produk (Products):**
+    *   CRUD (Create, Read, Update, Delete) produk.
+    *   Pengaturan tipe produk (Satuan atau Bundle).
+    *   Pengaturan harga dan deskripsi.
+*   **Manajemen Varian (Variants):**
+    *   Mengelola varian rasa (Coklat, Matcha, Keju, dll).
+    *   Manajemen stok per varian rasa.
+*   **Manajemen Pesanan (Orders):**
+    *   Melihat daftar pesanan masuk.
+    *   Detail pesanan termasuk varian rasa yang dipilih pelanggan dalam bundle.
+    *   Mengubah status pesanan.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🚀 Teknologi yang Digunakan
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+*   **Backend Framework:** Laravel 10.x
+*   **Admin Panel:** FilamentPHP 3.2
+*   **Frontend Framework:** Laravel Livewire
+*   **Styling:** Tailwind CSS
+*   **Database:** MySQL / PostgreSQL
+*   **Language:** PHP 8.1+
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📋 Prasyarat Sistem
 
-## Laravel Sponsors
+Sebelum menginstall, pastikan sistem Anda telah terinstall:
+*   [PHP](https://www.php.net/downloads) >= 8.1
+*   [Composer](https://getcomposer.org/)
+*   [Node.js](https://nodejs.org/) & NPM
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 🛠 Panduan Instalasi
 
-### Premium Partners
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini di lokal komputer Anda:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+1.  **Clone Repository**
+    ```bash
+    git clone https://github.com/username/aunty-donut.git
+    cd aunty-donut
+    ```
 
-## Contributing
+2.  **Install Dependencies PHP**
+    ```bash
+    composer install
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3.  **Install Dependencies Frontend**
+    ```bash
+    npm install
+    npm run build
+    ```
 
-## Code of Conduct
+4.  **Konfigurasi Environment**
+    Salin file `.env.example` menjadi `.env`:
+    ```bash
+    cp .env.example .env
+    ```
+    Sesuaikan konfigurasi database di dalam file `.env`:
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=nama_database_anda
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5.  **Generate App Key**
+    ```bash
+    php artisan key:generate
+    ```
 
-## Security Vulnerabilities
+6.  **Migrasi Database & Seeding Data**
+    Jalankan perintah ini untuk membuat tabel dan mengisi data dummy (Produk, Varian, dan Admin):
+    ```bash
+    php artisan migrate --seed
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+7.  **Jalankan Server**
+    ```bash
+    php artisan serve
+    ```
+    Aplikasi sekarang dapat diakses di `http://localhost:8000`.
 
-## License
+## 👤 Akun Demo
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Saat menjalankan perintah `php artisan migrate --seed`, sistem akan membuat akun admin secara otomatis:
+
+*   **Login URL:** `http://localhost:8000/admin`
+*   **Email:** `admin@auntydonut.com`
+*   **Password:** `password`
+
+## 🤝 Kontribusi
+
+Kontribusi selalu diterima! Jika Anda ingin berkontribusi:
+1.  Fork repository ini.
+2.  Buat branch fitur baru (`git checkout -b fitur-keren`).
+3.  Commit perubahan Anda (`git commit -m 'Menambahkan fitur keren'`).
+4.  Push ke branch (`git push origin fitur-keren`).
+5.  Buat Pull Request.
+
+## 📄 Lisensi
+
+Proyek ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
