@@ -1,0 +1,101 @@
+@import "../../../../vendor/filament/filament/resources/css/theme.css";
+
+@config '../../../../tailwind.admin.js';
+
+/* Custom Overrides */
+/* Sidebar Customization */
+/* Sidebar Customization */
+/* Sidebar Customization */
+:root:not(.dark) .fi-sidebar,
+:root:not(.dark) .fi-sidebar-nav,
+:root:not(.dark) aside.fi-sidebar {
+    background-color: white;
+    border-right: 1px solid rgb(243 244 246);
+}
+
+.dark .fi-sidebar,
+.dark .fi-sidebar-nav,
+.dark aside.fi-sidebar {
+    background-color: rgb(24 24 27); /* zinc-900 or similar dark color */
+    border-right: 1px solid rgb(39 39 42);
+}
+
+/* Specific transition for the width variable if used */
+:root {
+}
+
+.fi-sidebar-header,
+.fi-sidebar-footer {
+    transition: all 300ms ease-in-out;
+}
+
+/* Ensure the main content also transitions smoothly if it's pushed */
+.fi-main {
+    transition: margin-left 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root:not(.dark) .fi-sidebar-item-active {
+    background-color: rgb(255 251 235) !important; /* light amber bg */
+    color: rgb(217 119 6) !important; /* amber text */
+}
+
+.dark .fi-sidebar-item-active {
+    background-color: rgb(69 26 3) !important; /* dark amber bg */
+    color: rgb(251 191 36) !important; /* light amber text for contrast */
+}
+
+/* Global Border Radius & Shadows */
+.fi-card,
+.fi-section,
+.fi-widget {
+    border-radius: 1rem !important; /* More rounded */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05),
+        0 2px 4px -2px rgb(0 0 0 / 0.05) !important;
+    border: none !important;
+}
+
+/* Inputs */
+:root:not(.dark) .fi-input,
+:root:not(.dark) .fi-select-input {
+    border-radius: 0.75rem !important;
+    background-color: rgb(249 250 251) !important;
+    border-color: rgb(229 231 235) !important;
+}
+
+.dark .fi-input,
+.dark .fi-select-input {
+    border-radius: 0.75rem !important;
+    background-color: rgb(31 41 55) !important; /* gray-800 */
+    border-color: rgb(55 65 81) !important; /* gray-700 */
+}
+
+/* Buttons */
+.fi-btn {
+    border-radius: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.025em;
+}
+
+/* Page Header */
+:root:not(.dark) .fi-header-heading {
+    font-weight: 700 !important;
+    letter-spacing: -0.025em;
+    color: #1f2937;
+}
+
+.dark .fi-header-heading {
+    font-weight: 700 !important;
+    letter-spacing: -0.025em;
+    color: #f3f4f6;
+}
+
+/* Tables */
+.fi-ta-table {
+    --tw-ring-color: transparent !important;
+}
+.fi-ta-header-cell {
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}

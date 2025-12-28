@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // 1. Create Variants (Flavors)
         $flavors = [
-            ['name' => 'Choco Crunchy', 'slug' => 'choco-crunchy', 'stock' => 50],
-            ['name' => 'Strawberry Supreme', 'slug' => 'strawberry-supreme', 'stock' => 50],
-            ['name' => 'Matcha Latte', 'slug' => 'matcha-latte', 'stock' => 20], // Low stock test
-            ['name' => 'Classic Glazed', 'slug' => 'classic-glazed', 'stock' => 100],
-            ['name' => 'Tiramisu', 'slug' => 'tiramisu', 'stock' => 0], // Out of stock test
-            ['name' => 'Blueberry Cheese', 'slug' => 'blueberry-cheese', 'stock' => 40],
+            ['name' => 'Chocolate', 'slug' => 'chocolate', 'stock' => 50],
+            ['name' => 'Gula Tepung', 'slug' => 'gula-tepung', 'stock' => 50],
+            ['name' => 'Matcha', 'slug' => 'matcha', 'stock' => 20], // Low stock test
+            ['name' => 'Meses', 'slug' => 'meses', 'stock' => 100],
+            ['name' => 'Tiramisu', 'slug' => 'tiramisu', 'stock' => 100], // Out of stock test
+            ['name' => 'Taro', 'slug' => 'taro', 'stock' => 40],
         ];
 
         $variantModels = [];
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Single Classic Donut',
             'slug' => 'single-classic',
             'description' => 'One piece of our signature fluffy donut.',
-            'price' => 12000,
+            'price' => 2000,
             'is_bundle' => false,
         ]);
 
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Happiness Box (6 Pcs)',
             'slug' => 'box-of-6',
             'description' => 'Perfect for sharing! Pick any 6 of your favorite flavors.',
-            'price' => 65000, // Discounted from 12k * 6
+            'price' => 10000, // Discounted from 12k * 6
             'is_bundle' => true,
             'bundle_size' => 6,
         ]);
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Party Pack (12 Pcs)',
             'slug' => 'box-of-12',
             'description' => 'The ultimate party starter. Choose 12 donuts.',
-            'price' => 125000,
+            'price' => 12000,
             'is_bundle' => true,
             'bundle_size' => 12,
         ]);

@@ -67,10 +67,14 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('total_price')
                             ->label('Total'),
 
-                        // Custom View Field to show the specific flavors (JSON) nicely
-                        Forms\Components\ViewField::make('selected_variants')
+                        // Custom Placeholder to show the specific flavors (JSON) nicely
+                        Forms\Components\Placeholder::make('selected_variants')
                             ->label('Selected Flavors')
-                            ->view('filament.forms.components.order-items-variants')
+                            ->content(function ($record) {
+                                return view('filament.forms.components.order-items-variants', [
+                                    'variants' => $record?->resolved_variants->pluck('name') ?? [],
+                                ]);
+                            })
                             ->columnSpanFull(),
                     ])
                     ->columnSpanFull()
@@ -105,14 +109,48 @@ class OrderResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(), // Prefer View over Edit for read-only feel
-                Tables\Actions\EditAction::make(), // Allow editing status
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('chat')
                     ->label('WhatsApp')
                     ->icon('heroicon-o-chat-bubble-left-ellipsis')
                     ->color('success')
                     ->url(fn(Order $record) => $record->getWhatsAppUrl())
                     ->openUrlInNewTab(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\Action::make('process')
+                        ->label('Proses')
+                        ->icon('heroicon-o-arrow-path')
+                        ->color('warning')
+                        ->visible(fn(Order $record) => $record->status === 'pending')
+                        ->action(function (Order $record) {
+                            $record->update(['status' => 'processing']);
+                            return redirect(request()->header('Referer'));
+                        }),
+
+                    Tables\Actions\Action::make('complete')
+                        ->label('Selesai')
+                        ->icon('heroicon-o-check')
+                        ->color('success')
+                        ->visible(fn(Order $record) => in_array($record->status, ['pending', 'processing']))
+                        ->action(function (Order $record) {
+                            $record->update(['status' => 'completed']);
+                            return redirect(request()->header('Referer'));
+                        }),
+
+                    Tables\Actions\Action::make('cancel')
+                        ->label('Batal')
+                        ->icon('heroicon-o-x-mark')
+                        ->color('danger')
+                        ->visible(fn(Order $record) => !in_array($record->status, ['completed', 'cancelled']))
+                        ->action(function (Order $record) {
+                            $record->update(['status' => 'cancelled']);
+                            return redirect(request()->header('Referer'));
+                        }),
+                ])
+                    ->label('Ubah Status')
+                    ->icon('heroicon-m-ellipsis-vertical')
+                    ->color('info'),
             ])
             ->bulkActions([
                 //
