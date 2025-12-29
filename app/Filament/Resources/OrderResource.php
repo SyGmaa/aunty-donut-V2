@@ -92,11 +92,14 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
-                        'pending' => 'gray',
+                        'new' => 'info',
+                        'pending' => 'info',
                         'processing' => 'warning',
+                        'shipped' => 'success',
+                        'delivered' => 'success',
                         'completed' => 'success',
                         'cancelled' => 'danger',
-                        default => 'info',
+                        default => 'gray',
                     }),
                 Tables\Columns\TextColumn::make('total_price')->money('idr'),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
@@ -170,7 +173,17 @@ class OrderResource extends Resource
                         Infolists\Components\TextEntry::make('customer_phone')->label('Phone'),
                         Infolists\Components\TextEntry::make('address')->columnSpanFull(),
                         Infolists\Components\TextEntry::make('status')
-                            ->badge(),
+                            ->badge()
+                            ->color(fn(string $state): string => match ($state) {
+                                'new' => 'info',
+                                'pending' => 'info',
+                                'processing' => 'warning',
+                                'shipped' => 'success',
+                                'delivered' => 'success',
+                                'completed' => 'success',
+                                'cancelled' => 'danger',
+                                default => 'gray',
+                            }),
                         Infolists\Components\TextEntry::make('total_price')
                             ->money('idr'),
                         Infolists\Components\TextEntry::make('notes')->columnSpanFull(),
